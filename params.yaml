@@ -7,3 +7,10 @@ feature_engineering:
   oh_col: ['continent','unit_of_wage', 'region_of_employment']
   pow_tran: ['company_age' , 'no_of_employees', 'prevailing_wage']
 
+train:
+  RandomForestClassifier:
+    n_estimators: 100
+    max_depth: 5
+
+
+

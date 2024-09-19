@@ -2,6 +2,7 @@ jupyter
 pandas
 numpy
 matplotlib
+dvc
 plotly
 seaborn
 scipy

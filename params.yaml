@@ -1,3 +1,9 @@
 data_ingestion:
   test_size: 0.2
   random_state: 41
+
+feature_engineering:
+  ord_col: ['has_job_experience','requires_job_training','full_time_position', 'education_of_employee']
+  oh_col: ['continent','unit_of_wage', 'region_of_employment']
+  pow_tran: ['company_age' , 'no_of_employees', 'prevailing_wage']
+

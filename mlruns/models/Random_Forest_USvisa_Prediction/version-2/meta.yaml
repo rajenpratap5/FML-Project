@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1726845960911
+current_stage: None
+description: ''
+last_updated_timestamp: 1726845960911
+name: Random_Forest_USvisa_Prediction
+run_id: ba6815a7899f44b581decd97d7bccf4d
+run_link: ''
+source: mlflow-artifacts:/266948648969152831/ba6815a7899f44b581decd97d7bccf4d/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/266948648969152831/ba6815a7899f44b581decd97d7bccf4d/artifacts/model
+user_id: null
+version: 2

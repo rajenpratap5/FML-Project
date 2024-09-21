@@ -1,0 +1,43 @@
+stages:
+  data_ingestion:
+    cmd: python MLOps/components/data_ingestion.py
+    deps:
+    - MLOps/components/data_ingestion.py
+    params:
+    - data_ingestion.random_state
+    - data_ingestion.test_size
+    outs:
+    - data/raw/
+
+  feature_engineering:
+    cmd: python MLOps/components/feature_engineering.py train.csv test.csv
+    deps:
+    - data/raw/
+    - MLOps/components/feature_engineering.py
+    params:
+    - feature_engineering.ord_col
+    - feature_engineering.oh_col
+    - feature_engineering.pow_tran
+    outs:
+    - data/processed/
+    - models/transformer/
+
+  train:
+    cmd: python MLOps/components/train.py train_final.csv
+    deps:
+    - data/processed/train_final.csv
+    - MLOps/components/train.py
+    params:
+    - train.RandomForestClassifier
+    outs:
+    - models/classifiers/
+    
+  predict:
+    cmd: python MLOps/components/predict.py train_final.csv test_final.csv
+    deps:
+    - data/processed
+    - models/classifiers/
+    - MLOps/components/predict.py
+    metrics:
+    - reports/train_metrics.json
+    - reports/test_metrics.json

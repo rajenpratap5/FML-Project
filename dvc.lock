@@ -1,0 +1,108 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python MLOps/components/data_ingestion.py
+    deps:
+    - path: MLOps/components/data_ingestion.py
+      hash: md5
+      md5: 02b27a010a7a9db9b83194126eb31f09
+      size: 3089
+    params:
+      params.yaml:
+        data_ingestion.random_state: 41
+        data_ingestion.test_size: 0.2
+    outs:
+    - path: data/raw/
+      hash: md5
+      md5: d9cba9f2f2ab344a53c4ebbc14fbf08b.dir
+      size: 1612329
+      nfiles: 2
+  feature_engineering:
+    cmd: python MLOps/components/feature_engineering.py train.csv test.csv
+    deps:
+    - path: MLOps/components/feature_engineering.py
+      hash: md5
+      md5: 47151c2b3fbca9119f2eaa33c4b7f7c6
+      size: 5278
+    - path: data/raw/
+      hash: md5
+      md5: d9cba9f2f2ab344a53c4ebbc14fbf08b.dir
+      size: 1612329
+      nfiles: 2
+    params:
+      params.yaml:
+        feature_engineering.oh_col:
+        - continent
+        - unit_of_wage
+        - region_of_employment
+        feature_engineering.ord_col:
+        - has_job_experience
+        - requires_job_training
+        - full_time_position
+        - education_of_employee
+        feature_engineering.pow_tran:
+        - company_age
+        - no_of_employees
+        - prevailing_wage
+    outs:
+    - path: data/processed/
+      hash: md5
+      md5: fc8f9ea3bf26a9b5d6412b31b357c73b.dir
+      size: 3496899
+      nfiles: 2
+    - path: models/transformer/
+      hash: md5
+      md5: 8453c46e4b62a3222ae5d10fa64db6a0.dir
+      size: 5814
+      nfiles: 1
+  train:
+    cmd: python MLOps/components/train.py train_final.csv
+    deps:
+    - path: MLOps/components/train.py
+      hash: md5
+      md5: dc2790956cb89730d326577a69f54478
+      size: 3000
+      isexec: true
+    - path: data/processed/train_final.csv
+      hash: md5
+      md5: 502bdfa1752090cc599a7d31fbe2d94c
+      size: 2797548
+    params:
+      params.yaml:
+        train.RandomForestClassifier:
+          n_estimators: 200
+          max_depth: 20
+          class_weight: balanced
+    outs:
+    - path: models/classifiers/
+      hash: md5
+      md5: 2e22746386c74608c75accd2a28bea11.dir
+      size: 109940809
+      nfiles: 1
+  predict:
+    cmd: python MLOps/components/predict.py train_final.csv test_final.csv
+    deps:
+    - path: MLOps/components/predict.py
+      hash: md5
+      md5: 72560cb161ba3aebeaf90d2ef6423e37
+      size: 4593
+      isexec: true
+    - path: data/processed
+      hash: md5
+      md5: fc8f9ea3bf26a9b5d6412b31b357c73b.dir
+      size: 3496899
+      nfiles: 2
+    - path: models/classifiers/
+      hash: md5
+      md5: 2e22746386c74608c75accd2a28bea11.dir
+      size: 109940809
+      nfiles: 1
+    outs:
+    - path: reports/test_metrics.json
+      hash: md5
+      md5: de92d48d6fb9280bb0e83788129ff34e
+      size: 165
+    - path: reports/train_metrics.json
+      hash: md5
+      md5: 9c5fa9eb617b3a4c6bbef7ca3214d5d3
+      size: 169

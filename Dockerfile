@@ -5,7 +5,7 @@ FROM python:3.10-slim
 RUN apt update -y && apt install awscli -y
 
 # set the working directory
-WORKDIR /app/
+WORKDIR /app
 
 # copy the requirements file into the image
 COPY requirements.txt .
@@ -14,7 +14,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy files into image
-COPY container_models  .
+COPY /container_models  .
 COPY app.py .
 COPY data_model.py .
 COPY params.yaml .

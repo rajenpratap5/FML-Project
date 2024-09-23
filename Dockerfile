@@ -14,7 +14,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy files into image
-COPY ./container_models/ .
+COPY container_models  .
 COPY app.py .
 COPY data_model.py .
 COPY params.yaml .

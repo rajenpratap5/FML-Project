@@ -8,3 +8,5 @@ fastapi
 uvicorn
 mlflow==2.5.0
 PyYAML
+pytest
+flake8

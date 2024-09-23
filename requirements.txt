@@ -1,0 +1,10 @@
+pandas
+numpy
+scikit-learn
+imblearn
+xgboost
+catboost
+fastapi
+uvicorn
+mlflow==2.5.0
+PyYAML

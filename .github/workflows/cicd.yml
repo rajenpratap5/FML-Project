@@ -16,16 +16,6 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
     
-      - name: Install Apache Arrow Dependencies
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y -V \
-              libarrow-dev \
-              libarrow-python-dev \
-              libparquet-dev
-    
-      - name: Set ARROW_HOME Environment Variable
-        run: echo "ARROW_HOME=/usr/local" >> $GITHUB_ENV
       
       - name: Install Packages
         run: |

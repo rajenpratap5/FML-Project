@@ -16,7 +16,7 @@ RUN pip install -r requirements.txt
 # copy files into image
 COPY  ./models/ ./models/
 COPY app.py .
-COPY data_models.py .
+COPY data_model.py .
 COPY params.yaml .
 
 # expose the port 

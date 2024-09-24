@@ -69,16 +69,6 @@ model_pipe = Pipeline(steps=[
     ('classify',model)
 ])
 
-# Converting the year of establishment to age of company
-def calculate_company_age(df: pd.DataFrame, year_column: str = 'yr_of_estab') -> pd.DataFrame:
-    current_year = datetime.now().year
-    df['company_age'] = current_year - df[year_column]
-    return df
-
-# Dropping the column
-def drop_column(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
-    return df.drop(columns=[column_name], axis=1)
-
 @app.get("/", tags=["authentication"])
 async def index(request: Request):
 

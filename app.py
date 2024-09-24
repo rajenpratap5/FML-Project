@@ -5,7 +5,6 @@ from fastapi.templating import Jinja2Templates
 from starlette.responses import HTMLResponse, RedirectResponse
 from sklearn.pipeline import Pipeline
 import uvicorn
-from data_model import PredictionDataset
 import pandas as pd
 import joblib
 from pathlib import Path
@@ -97,12 +96,6 @@ async def do_predictions(request: Request):
     logger.log_message("usvisa_data done")
     usvisa_data = pd.DataFrame(form_data, index=[0])
     logger.log_message("usvisa_data converted to dataframe")
-    # Calculating company age
-    # usvisa_data = calculate_company_age(usvisa_data)
-    # logger.log_message("company age calculated")
-    # dropping column year of establishment and case_id
-    # usvisa_data = drop_column(usvisa_data, "case_id")
-    # usvisa_data = drop_column(usvisa_data, "yr_of_estab")
     
     prediction = model_pipe.predict(usvisa_data)[0]
 

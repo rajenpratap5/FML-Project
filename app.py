@@ -58,8 +58,8 @@ current_file_path = Path(__file__).parent
 model_path = current_file_path / "models" / "classifiers" / "rf_clasfy.joblib"
 preprocessor_path = model_path.parent.parent / "transformer" / "col_transformer.joblib"
 
-model = joblib.load(model_path)
-preprocessor = joblib.load(preprocessor_path)
+model = joblib.load(model_path,mmap_mode=None)
+preprocessor = joblib.load(preprocessor_path,mmap_mode=None)
 
 model_pipe = Pipeline(steps=[
     ('preprocess',preprocessor),

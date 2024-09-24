@@ -9,16 +9,15 @@ import pandas as pd
 import joblib
 from pathlib import Path
 from datetime import datetime
-from MLOps.logger import CustomLogger
 import logging
 
 
-# custom logger for module
-logger = CustomLogger('train')
-# create a stream handler
-console_handler = logging.StreamHandler()
-# add console handler to the logger
-logger.logger.addHandler(console_handler)
+# # custom logger for module
+# logger = CustomLogger('train')
+# # create a stream handler
+# console_handler = logging.StreamHandler()
+# # add console handler to the logger
+# logger.logger.addHandler(console_handler)
 
 
 app = FastAPI()
@@ -76,8 +75,8 @@ async def index(request: Request):
 
 @app.post("/")
 async def do_predictions(request: Request):
-    logger.log_message(f"Received prediction request")
-    logger.log_message("Data conversion started")
+    # logger.log_message(f"Received prediction request")
+    # logger.log_message("Data conversion started")
     form = DataForm(request)
     await form.get_usvisa_data()
     
@@ -93,9 +92,9 @@ async def do_predictions(request: Request):
                     'unit_of_wage': form.unit_of_wage,
                     'full_time_position': form.full_time_position,
     }
-    logger.log_message("usvisa_data done")
+    #logger.log_message("usvisa_data done")
     usvisa_data = pd.DataFrame(form_data, index=[0])
-    logger.log_message("usvisa_data converted to dataframe")
+    #logger.log_message("usvisa_data converted to dataframe")
     
     prediction = model_pipe.predict(usvisa_data)[0]
 

@@ -16,6 +16,8 @@ RUN pip install -r requirements.txt
 # copy files into image
 COPY /models /app
 COPY app.py /app
+COPY /static /app
+COPY /templates /app
 
 
 # expose the port 

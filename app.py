@@ -8,8 +8,7 @@ import uvicorn
 import pandas as pd
 import joblib
 from pathlib import Path
-from datetime import datetime
-import logging
+from typing import Optional
 
 
 # # custom logger for module

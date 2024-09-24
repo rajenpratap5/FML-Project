@@ -14,10 +14,10 @@ COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
 # copy files into image
-COPY models /app
+COPY models /app/models
 COPY app.py /app
-COPY static /app
-COPY templates /app
+COPY static /app/static
+COPY templates /app/templates
 
 
 # expose the port 

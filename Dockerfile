@@ -1,5 +1,5 @@
 # base env
-FROM python:3.10-slim
+FROM python:3.10-slim-buster
 
 # Updating and installing awscli
 RUN apt update -y && apt install awscli -y
@@ -14,11 +14,11 @@ COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
 # copy files into image
-COPY /models/ /app/
-COPY app.py /app/
-COPY data_model.py /app/
-COPY params.yaml /app/
-COPY /MLOps/ /app/
+COPY /models /app
+COPY app.py /app
+COPY data_model.py /app
+COPY params.yaml /app
+COPY /MLOps /app
 
 # expose the port 
 EXPOSE 8000

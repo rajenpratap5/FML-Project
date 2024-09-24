@@ -81,11 +81,6 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       
-      
-      - name: Pull latest images
-        run: |
-         docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
-      
       - name: Delete Previous Container on EC2
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -93,6 +88,10 @@ jobs:
           IMAGE_TAG: latest
         run: |
            docker rm -f usvisa || true
+           
+      - name: Pull latest images
+        run: |
+         docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
 
       - name: Run Docker Image to serve users
         run: |

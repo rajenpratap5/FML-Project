@@ -2,8 +2,6 @@ pandas==2.2.3
 numpy==1.26.4
 scikit-learn==1.5.2
 imblearn==0.0
-xgboost==2.1.1
-catboost==1.2.7
 fastapi==0.115.0
 uvicorn==0.30.6
 mlflow==2.5.0
@@ -19,3 +17,4 @@ pydantic==1.10.18
 pydantic_core==2.23.4
 smmap==5.0.1
 starlette==0.38.6
+python-multipart

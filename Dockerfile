@@ -8,10 +8,10 @@ RUN apt update -y && apt install awscli -y
 WORKDIR /app
 
 # copy the requirements file into the image
-COPY requirements_new.txt /app
+COPY requirements.txt /app
 
 # Install the python requirements
-RUN pip install -r requirements_new.txt
+RUN pip install -r requirements.txt
 
 # copy files into image
 COPY models /app/models
